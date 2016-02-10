@@ -6,6 +6,7 @@ Description:  Easily enable taxonomies for use with ACT templates.
 Version: 1.0.0
 Author: CGD Inc.
 Author URI: http://cgd.io
+GitHub Plugin URI: https://github.com/clifgriffin/ACT-Taxonomies
 
 ------------------------------------------------------------------------
 Copyright 2009-2015 Clif Griffin Development Inc.
@@ -30,9 +31,9 @@ class ACT_Taxonomies {
 		add_action('act_admin_page_after_row', array($this, 'add_taxonomy_settings'), 10, 1 );
 		add_action('init', array($this, 'register_template_taxonomies'), 20 ); // anything after priority 0 should be fine
 	}
-	
+
 	function add_taxonomy_settings( $plugin ) {
-		
+
 		$taxonomies = get_taxonomies(null, 'objects');
 		$current_taxonomies = $plugin->get_setting('taxonomies');
 		?>
@@ -40,7 +41,7 @@ class ACT_Taxonomies {
 			<th scope="row" valign="top">Registered Taxonomies</th>
 			<td>
 				<input type="hidden" name="<?php echo $plugin->get_field_name('taxonomies'); ?>[]" value="" />
-				<?php foreach($taxonomies as $tax): 
+				<?php foreach($taxonomies as $tax):
 					if ( in_array($tax->name, array('nav_menu', 'link_category', 'post_tag', 'category', 'post_format') ) ) continue; ?>
 					<p>
 						<label>
@@ -53,15 +54,15 @@ class ACT_Taxonomies {
 		</tr>
 		<?php
 	}
-	
+
 	function register_template_taxonomies() {
 		global $Advanced_Content_Templates;
-		
+
 		if ( empty($Advanced_Content_Templates) ) return;
-		
+
 		$taxonomies = $Advanced_Content_Templates->get_setting('taxonomies');
-		if ( empty($taxonomies) ) return; 
-		
+		if ( empty($taxonomies) ) return;
+
 		foreach($taxonomies as $tax) {
 			if ( empty($tax) ) continue;
 			register_taxonomy_for_object_type( $tax, $Advanced_Content_Templates->post_type );
