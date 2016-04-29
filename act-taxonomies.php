@@ -3,7 +3,7 @@
 Plugin Name: ACT Taxonomies
 Plugin URI: http://cgd.io
 Description:  Easily enable taxonomies for use with ACT templates.
-Version: 1.0.0
+Version: 1.0.1
 Author: CGD Inc.
 Author URI: http://cgd.io
 GitHub Plugin URI: https://github.com/clifgriffin/ACT-Taxonomies
@@ -41,14 +41,16 @@ class ACT_Taxonomies {
 			<th scope="row" valign="top">Registered Taxonomies</th>
 			<td>
 				<input type="hidden" name="<?php echo $plugin->get_field_name('taxonomies'); ?>[]" value="" />
-				<?php foreach($taxonomies as $tax):
-					if ( in_array($tax->name, array('nav_menu', 'link_category', 'post_tag', 'category', 'post_format') ) ) continue; ?>
-					<p>
-						<label>
-							<input type="checkbox" name="<?php echo $plugin->get_field_name('taxonomies'); ?>[]" value="<?php echo $tax->name; ?>" <?php if ( in_array($tax->name, $current_taxonomies) ) echo "checked='checked'"; ?>> <?php echo $tax->label; ?>
-						</label>
-					</p>
-				<?php endforeach; ?>
+				<?php if ( ! empty($taxonomies) && is_array($taxonomies) ): ?>
+					<?php foreach($taxonomies as $tax):
+						if ( in_array($tax->name, array('nav_menu', 'link_category', 'post_tag', 'category', 'post_format') ) ) continue; ?>
+						<p>
+							<label>
+								<input type="checkbox" name="<?php echo $plugin->get_field_name('taxonomies'); ?>[]" value="<?php echo $tax->name; ?>" <?php if ( in_array($tax->name, $current_taxonomies) ) echo "checked='checked'"; ?>> <?php echo $tax->label; ?>
+							</label>
+						</p>
+					<?php endforeach; ?>
+				<?php endif; ?>
 				<p class="description">These taxonomies will be available to use with content templates.</p>
 			</td>
 		</tr>
@@ -61,7 +63,7 @@ class ACT_Taxonomies {
 		if ( empty($Advanced_Content_Templates) ) return;
 
 		$taxonomies = $Advanced_Content_Templates->get_setting('taxonomies');
-		if ( empty($taxonomies) ) return;
+		if ( empty($taxonomies) || ! is_array($taxonomies) ) return;
 
 		foreach($taxonomies as $tax) {
 			if ( empty($tax) ) continue;
