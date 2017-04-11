@@ -3,10 +3,10 @@
 Plugin Name: ACT Taxonomies
 Plugin URI: http://cgd.io
 Description:  Easily enable taxonomies for use with ACT templates.
-Version: 1.0.1
+Version: 1.0.2
 Author: CGD Inc.
 Author URI: http://cgd.io
-GitHub Plugin URI: https://github.com/clifgriffin/ACT-Taxonomies
+GitHub URI: https://github.com/clifgriffin/ACT-Taxonomies
 
 ------------------------------------------------------------------------
 Copyright 2009-2015 Clif Griffin Development Inc.
