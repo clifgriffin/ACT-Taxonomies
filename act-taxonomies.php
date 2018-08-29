@@ -5,7 +5,7 @@ Plugin URI: http://cgd.io
 Description:  Easily enable taxonomies for use with ACT templates.
 Version: 1.0.3
 Author: CGD Inc.
-Author URI: http://cgd.io
+Author URI: http://objectiv.co
 GitHub URI: https://github.com/clifgriffin/ACT-Taxonomies
 
 ------------------------------------------------------------------------
