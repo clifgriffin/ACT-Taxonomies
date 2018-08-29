@@ -33,7 +33,6 @@ class ACT_Taxonomies {
 	}
 
 	function add_taxonomy_settings( $plugin ) {
-
 		$taxonomies = get_taxonomies(null, 'objects');
 		$current_taxonomies = $plugin->get_setting('taxonomies');
 		?>
