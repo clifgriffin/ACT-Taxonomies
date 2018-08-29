@@ -3,7 +3,7 @@
 Plugin Name: ACT Taxonomies
 Plugin URI: http://cgd.io
 Description:  Easily enable taxonomies for use with ACT templates.
-Version: 1.0.2
+Version: 1.0.3
 Author: CGD Inc.
 Author URI: http://cgd.io
 GitHub URI: https://github.com/clifgriffin/ACT-Taxonomies
@@ -58,7 +58,7 @@ class ACT_Taxonomies {
 	}
 
 	function register_template_taxonomies() {
-		global $Advanced_Content_Templates;
+		global $Advanced_Content_Templates, $wp_taxonomies;
 
 		if ( empty($Advanced_Content_Templates) ) return;
 
@@ -67,6 +67,10 @@ class ACT_Taxonomies {
 
 		foreach($taxonomies as $tax) {
 			if ( empty($tax) ) continue;
+
+			if ( $Advanced_Content_Templates->get_setting('enable_gutenberg') == 'true' && ! empty( $wp_taxonomies[ $tax ] ) && is_a( $wp_taxonomies[ $tax ], 'WP_Taxonomy' ) ) {
+				$wp_taxonomies[ $tax ]->show_in_rest = true;
+            }
 			register_taxonomy_for_object_type( $tax, $Advanced_Content_Templates->post_type );
 		}
 	}
